@@ -26,9 +26,8 @@ public class VendingMachineCLI {
 			} else if (choice.equals(MAIN_MENU_OPTION_PURCHASE)) {
 				String[] purchaseMenuOptions = PurchaseMenu.getPurchaseMenuOptions();
 				choice = (String) menu.getChoiceFromOptions(purchaseMenuOptions);
-				if(choice.equals("1")) {
-					String[] feedMoneyMenuOptions = FeedMoneyMenu.getFeedMoneyMenuOptions();
-					choice = (String) menu.getChoiceFromOptions(feedMoneyMenuOptions);
+				if(choice.equals("Feed Money")) {
+					purchase.feedMoney(menu);
 				}
 			}
 			else if(choice.equals(MAIN_MENU_OPTION_EXIT)) {

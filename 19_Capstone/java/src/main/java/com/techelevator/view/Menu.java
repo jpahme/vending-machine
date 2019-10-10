@@ -5,6 +5,8 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
+import com.techelevator.Purchase;
+
 public class Menu {
 
 	private PrintWriter out;
@@ -33,13 +35,15 @@ public class Menu {
 				choice = options[selectedOption - 1];
 			}
 		} catch (NumberFormatException e) {
-			// eat the exception, an error message will be displayed below since choice will be null
+			// eat the exception, an error message will be displayed below since choice will
+			// be null
 		}
 		if (choice == null) {
 			out.println("\n*** " + userInput + " is not a valid option ***\n");
 		}
 		return choice;
 	}
+
 
 	private void displayMenuOptions(Object[] options) {
 		out.println();
@@ -48,7 +52,7 @@ public class Menu {
 			out.println(optionNum + ") " + options[i]);
 		}
 		if (options.equals(PurchaseMenu.getPurchaseMenuOptions())) {
-			out.print("\nCurrent Money Provided: \n");
+			out.print("\nCurrent Money Provided: $" + Purchase.getCurrentMoney() + "\n");
 		}
 		out.print("\nPlease choose an option >>> ");
 		out.flush();
