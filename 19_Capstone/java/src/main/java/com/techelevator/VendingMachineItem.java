@@ -6,7 +6,7 @@ public abstract class VendingMachineItem {
 	private String name;
 	private BigDecimal price;
 	private String slotIdentifier;
-	private int stock = 5;
+	private Integer stock = 5;
 	private String type;
 	
 	public VendingMachineItem(String name, BigDecimal price, String slotIdentifier) {
@@ -29,7 +29,7 @@ public abstract class VendingMachineItem {
 	}
 
 
-	public int getStock() {
+	public Integer getStock() {
 		return stock;
 	}
 

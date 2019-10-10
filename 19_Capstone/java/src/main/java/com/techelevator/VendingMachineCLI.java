@@ -16,12 +16,12 @@ public class VendingMachineCLI {
 		this.menu = menu;
 	}
 
-	public void run() {
+	public void run(VendingMachineInventory inventory) {
 		while (true) {
 			String choice = (String) menu.getChoiceFromOptions(MAIN_MENU_OPTIONS);
 
 			if (choice.equals(MAIN_MENU_OPTION_DISPLAY_ITEMS)) {
-				// display vending machine items
+				inventory.printInventory();
 			} else if (choice.equals(MAIN_MENU_OPTION_PURCHASE)) {
 				String[] purchaseMenuOptions = PurchaseMenu.getPurchaseMenuOptions();
 				choice = (String) menu.getChoiceFromOptions(purchaseMenuOptions);
@@ -35,6 +35,8 @@ public class VendingMachineCLI {
 	public static void main(String[] args) {
 		Menu menu = new Menu(System.in, System.out);
 		VendingMachineCLI cli = new VendingMachineCLI(menu);
-		cli.run();
+		VendingMachineInventory vendingMachineInventory = new VendingMachineInventory();
+		vendingMachineInventory.createInventory();
+		cli.run(vendingMachineInventory);
 	}
 }
