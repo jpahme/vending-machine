@@ -47,6 +47,9 @@ public class Menu {
 			int optionNum = i + 1;
 			out.println(optionNum + ") " + options[i]);
 		}
+		if (options.equals(PurchaseMenu.getPurchaseMenuOptions())) {
+			out.print("\nCurrent Money Provided: \n");
+		}
 		out.print("\nPlease choose an option >>> ");
 		out.flush();
 	}
