@@ -141,7 +141,7 @@ VendingMachineInventory Class
 
 Purchase Class
 
-    private BigDecimal currentAmountOfMoney;
+    private BigDecimal currentAmountOfMoney; (get, set)
 
     feedMoney method that will give the user an option to add ($1, $2, $5, or $10)
         -Print out menu of options and asks user how much they would like to add
