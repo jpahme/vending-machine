@@ -1,5 +1,6 @@
 package com.techelevator;
 
+import com.techelevator.view.FeedMoneyMenu;
 import com.techelevator.view.Menu;
 import com.techelevator.view.PurchaseMenu;
 
@@ -16,7 +17,7 @@ public class VendingMachineCLI {
 		this.menu = menu;
 	}
 
-	public void run(VendingMachineInventory inventory) {
+	public void run(VendingMachineInventory inventory, Purchase purchase) {
 		while (true) {
 			String choice = (String) menu.getChoiceFromOptions(MAIN_MENU_OPTIONS);
 
@@ -25,6 +26,10 @@ public class VendingMachineCLI {
 			} else if (choice.equals(MAIN_MENU_OPTION_PURCHASE)) {
 				String[] purchaseMenuOptions = PurchaseMenu.getPurchaseMenuOptions();
 				choice = (String) menu.getChoiceFromOptions(purchaseMenuOptions);
+				if(choice.equals("1")) {
+					String[] feedMoneyMenuOptions = FeedMoneyMenu.getFeedMoneyMenuOptions();
+					choice = (String) menu.getChoiceFromOptions(feedMoneyMenuOptions);
+				}
 			}
 			else if(choice.equals(MAIN_MENU_OPTION_EXIT)) {
 				// do exit
@@ -37,6 +42,7 @@ public class VendingMachineCLI {
 		VendingMachineCLI cli = new VendingMachineCLI(menu);
 		VendingMachineInventory vendingMachineInventory = new VendingMachineInventory();
 		vendingMachineInventory.createInventory();
-		cli.run(vendingMachineInventory);
+		Purchase purchase = new Purchase();
+		cli.run(vendingMachineInventory, purchase);
 	}
 }
