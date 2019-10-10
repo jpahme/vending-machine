@@ -1,0 +1,202 @@
+VENDING MACHINE REQUIREMENTS
+
+Day 1 Goals:
+
+1) Git working correctly X
+2) Understand the starter code X 
+3) Have a plan
+4) Create class hierarchy for vending machine products
+5) Have menu setup
+
+
+
+
+
+
+
+
+*** Make sure we have tests! 
+1. Dispenses beverages, candy, chips, and gum
+
+-Each vending machine item needs a Name and a Price
+
+2. A main menu should display when the software is run presenting the following options
+
+	>(1) Display Vending  Machine Items
+	>(2) Purchase
+	>(3) Exit
+
+3. Vending machine inventory is stocked via an input file when the vending machine is started
+
+4. THe vending machine is automatically restocked each time the application runs
+
+5. When the customer selects (1) Display Vending Machine Items they are presented a list of all items in the vending machine with its quantity remaining.
+	a.Each vending machine product has a slot identifier and a uprchase price
+	b. Each slot in the vending machine has enough room for 5 of that product
+	c. Every product is initially stocked to the maximum amount
+	d. A product which has run out should indicate it is SOLD OUT
+
+6. When the customer selects (2) Purchase they are guided through the purchasing process menu:
+
+	>(1) Feed Money
+	>(2) Select Product
+	>(3) FinishTransaction
+	> Current Money Provided: $2.00
+
+7. The purchase process flow is as follows
+
+	a. Selecting (1) Feed Money - a customer can repeatedly feed money into the machine in valid whole dollar amounts ($1, $2, $5, $10)
+		i. The Current Money Provided indicates how much money the customer has fed into the machine
+	b. Selecting(2) Select Product allows the customer to select a product to purchase.
+		i. Show the list of products available and allow the customer to enter to code to select an item
+		ii. If the product code does not exist, the customer is informed and returned to the Purchase menu
+		iii. If a product is sold out, the customer is informed and returned to the Purchase menu.
+		iv. If a valid product is selected it is dispensed to the customer
+		v. Dispensing an item will print the item name, cost, and the money remaining. Dispensing will alsoreturn a message.
+			1. All chip items will print "Crunch Crunch, Yum!"
+			2. All candy items will print "Munch Munch, Yum!"
+			3. All drink items will print "Glug Glug, Yum!"
+			4. All gum items will print "Chew Chew, Yum!"
+		vi. After the product is dispensed, the machine should update its balance accordingly and return the customer to the Purchase Menu
+	c. Selecting (3) Finish Transaction allows the customer to complete the transaction and receive any remaining change back
+		i.The customer's money is returned using nickels, dimes, and quarters (using the smallest amount of coins possible)
+		ii. The machine's current balance should be updated to $0 dollars remaining
+	d. After the purchase is complete the user is returned to the "Main" menu to continue using the vending machine
+8. All purchases must be audited to prevent theft from the vending machine
+	a. Each purchase should generate a line in a file called Log.txt
+	b. The audit entry should be in the format > 01/01/2016 12:00:00 PM FEED MONEY: $5.00 $5.00 >01/01/2016 12:00:15 PM FEED MONEY: $5.00 $10.00 >01/01/2016 12:00:20 PM Crunchie B4 $10.00 $8.50 >01/01/2016 12:01:25 PM Cowtales B2 $8.50 $7.50 >01/01/2016 12:01:35 PM GIVE CHANGE: $7.50 $0.00 >
+
+9. Create as many of your classes as possible to be "testable" classes. Limit console input and output to as few classes as possible.
+
+10. Optional -Sales Report
+	a. Provide a "Hidden" menu option on the main menu ("4") that writes to a sales report that show the total sales since the machine was started. The name of the file should include the date and time so that each sales report is uniquely named.
+	b. An example of the output formate is provided. Please provide unit tests demonstrating your Code works correctly.
+
+
+
+
+
+
+
+Abstract Class called VendingMachineItem
+
+    private String name; (get)
+    private BigDecimal price; (get)
+    private String slotIdentifier; (get)
+    private int stock = 5; (get, set)
+    private String type;
+
+
+    Constructor: name, price, slotIdentifier
+
+Chips Class extend VendingMachineItem
+
+    private final static String type = "Chips"; (get)
+    private final static String purchaseMessage = "Crunch Crunch, Yum!"; (get)
+   
+    constructor: super()
+
+Gum Class extends VendingMachineItem
+
+    private final static String type = "Gum"; (get)
+    private final static String purchaseMessage = "Chew Chew, Yum!"; (get)
+
+Drink Class extends VendingMachineItem
+
+    private final static String type = "Drink"; (get)
+    private final static String purchaseMessage = "Glug Glug, Yum!"; (get)
+
+Candy Class extends VendingMachineItem
+
+    private final static String type = "Candy"; (get)
+    private final static String purchaseMessage = "Crunch Crunch, Yum!"; (get)
+
+VendingMachineInventory Class
+
+	private list<VendingMachineItem> vendingMachineInventory; (get, set)
+
+	Has a method that reads in the inventory line by line from an input file
+	and adds the info to the list, giving them a stock of 5
+
+		-Create a file object using the name of input file
+		-Make sure the file exists
+		-Create a scanner to read the file (throw exception if it doesn't work)
+		-Read the file line by line with a loop
+			EX. A1|Potato Crisps|3.05|Chip
+			-split the line into an array of string split by "|"
+			-create a new VendingMachineItem 
+				-first element assigns the slotIdentifier
+				-second element assigns the name
+				-third element assigns the price
+				-fourth element determines which type of element will be created
+				-stock will be assigned the value of 5 by default
+				-add the new item to the list of vending machine items
+
+	Has a method that prints out everything from the list line by line in the correct format
+	
+	-Loop that iterates through each item in the vending Machine
+		-print out the slot identifier, product name, price, and stock 
+		    (if stock is 0, prints SOLD OUT instead)
+	-Pressing any input will send the user back to the main menu
+
+Purchase Class
+
+    private BigDecimal currentAmountOfMoney;
+
+    feedMoney method that will give the user an option to add ($1, $2, $5, or $10)
+        -Print out menu of options and asks user how much they would like to add
+	-If user enter invalid option, say invalid option and return to purchase menu
+	-amount to Add is equal to which of the four choices the user has selected
+	-adds that amount to the current amount of money
+	-returns the user to back to the purchasemenu
+
+    select product method
+	-prints out the list of current items (could be accessed through print inventory method from the inventory class)
+	-user will input choice based on slot identifier
+	-if user input does not match any of the slot identifiers, inform them that it is an invalid choice, and return them to the purchase menu
+	-if the user's choice is sold out, inform them that it is sold out and return them to purchase menu
+	-entering a correct product code will "dispense" that product
+	-return the user back to the purchase menu
+	
+
+    dispense method(item purchased)
+	-print out the item name, name, cost, and total amount of money remaining
+	-print out message specific for the type of item
+	
+
+    update stock method(item purchased)
+	-will decrease the item's stock by 1
+
+   finish transaction method
+	-calculate the most efficient way to give back change from total amount of money using calculatechange method
+	-prints out the number of quarters, dimes, nickels, and pennies to be returned
+	-set total amount of money back to 0 using method
+	-return to the main menu
+
+    reset total amount of money method
+	-sets total amount of money back to 0
+
+ChangeCalculator Class
+
+    calculate change method (amount of money)
+    	-create variables to count how many quarters, nickels, dimes, and pennies
+		-while amount of money is greater or equal to 25 cents
+			-subtract 25 cents from amount of money
+			-add one to count of quarters
+			
+		-while amount of money is greater or equal to 10 cents
+			-subtract 10 cents from amount of money
+			-add one to count of dimes
+		
+		-while amount of money is greater or equal to 55 cents
+			-subtract 5 cents from amount of money
+			-add one to count of nickels
+			
+		-while amount of money is greater or equal to >
+			-subtract 1 cent from amount of money
+			-add one to count of pennies			
+
+		-print out "Total change is: number of quarters, number of dimes, number of nickels, and number of pennies
+    
+
+
