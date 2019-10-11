@@ -16,35 +16,35 @@ Day 1 Goals:
 
 
 *** Make sure we have tests! 
-1. Dispenses beverages, candy, chips, and gum
+1. Dispenses beverages, candy, chips, and gum XXXXXX
 
 -Each vending machine item needs a Name and a Price
 
-2. A main menu should display when the software is run presenting the following options
+2. A main menu should display when the software is run presenting the following options XXXXX
 
 	>(1) Display Vending  Machine Items
 	>(2) Purchase
 	>(3) Exit
 
-3. Vending machine inventory is stocked via an input file when the vending machine is started
+3. Vending machine inventory is stocked via an input file when the vending machine is started XXXXX
 
-4. THe vending machine is automatically restocked each time the application runs
+4. THe vending machine is automatically restocked each time the application runs xxxxx
 
-5. When the customer selects (1) Display Vending Machine Items they are presented a list of all items in the vending machine with its quantity remaining.
+5. When the customer selects (1) Display Vending Machine Items they are presented a list XXXXX
+of all items in the vending machine with its quantity remaining.
 	a.Each vending machine product has a slot identifier and a uprchase price
 	b. Each slot in the vending machine has enough room for 5 of that product
 	c. Every product is initially stocked to the maximum amount
 	d. A product which has run out should indicate it is SOLD OUT
 
-6. When the customer selects (2) Purchase they are guided through the purchasing process menu:
+6. When the customer selects (2) Purchase they are guided through the purchasing process menu: XXXXX
 
 	>(1) Feed Money
 	>(2) Select Product
 	>(3) FinishTransaction
 	> Current Money Provided: $2.00
 
-7. The purchase process flow is as follows
-
+7. The purchase process flow is as follows XXXXX
 	a. Selecting (1) Feed Money - a customer can repeatedly feed money into the machine in valid whole dollar amounts ($1, $2, $5, $10)
 		i. The Current Money Provided indicates how much money the customer has fed into the machine
 	b. Selecting(2) Select Product allows the customer to select a product to purchase.
@@ -62,6 +62,7 @@ Day 1 Goals:
 		i.The customer's money is returned using nickels, dimes, and quarters (using the smallest amount of coins possible)
 		ii. The machine's current balance should be updated to $0 dollars remaining
 	d. After the purchase is complete the user is returned to the "Main" menu to continue using the vending machine
+	
 8. All purchases must be audited to prevent theft from the vending machine
 	a. Each purchase should generate a line in a file called Log.txt
 	b. The audit entry should be in the format > 01/01/2016 12:00:00 PM FEED MONEY: $5.00 $5.00 >01/01/2016 12:00:15 PM FEED MONEY: $5.00 $10.00 >01/01/2016 12:00:20 PM Crunchie B4 $10.00 $8.50 >01/01/2016 12:01:25 PM Cowtales B2 $8.50 $7.50 >01/01/2016 12:01:35 PM GIVE CHANGE: $7.50 $0.00 >
@@ -69,7 +70,8 @@ Day 1 Goals:
 9. Create as many of your classes as possible to be "testable" classes. Limit console input and output to as few classes as possible.
 
 10. Optional -Sales Report
-	a. Provide a "Hidden" menu option on the main menu ("4") that writes to a sales report that show the total sales since the machine was started. The name of the file should include the date and time so that each sales report is uniquely named.
+	a. Provide a "Hidden" menu option on the main menu ("4") that writes to a sales report that show the total sales since 
+	the machine was started. The name of the file should include the date and time so that each sales report is uniquely named.
 	b. An example of the output formate is provided. Please provide unit tests demonstrating your Code works correctly.
 
 

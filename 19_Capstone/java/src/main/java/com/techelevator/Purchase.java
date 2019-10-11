@@ -13,6 +13,7 @@ public class Purchase {
 	public static BigDecimal getCurrentMoney() {
 		return currentMoney.setScale(2, BigDecimal.ROUND_UP);
 	}
+	
 
 	public static void addToCurrentMoney(BigDecimal amountToAdd) {
 		currentMoney = currentMoney.add(amountToAdd).setScale(2, BigDecimal.ROUND_UP);
@@ -77,6 +78,16 @@ public class Purchase {
 		Integer currentStock = item.getStock();
 		Integer purchasedItem = 1;
 		item.setStock(currentStock - purchasedItem);
+	}
+	
+	public void finishTransaction() {
+		ChangeCalculator.calculateChange(getCurrentMoney());
+		resetCurrentMoney();
+	}
+	
+	public void resetCurrentMoney() {
+		currentMoney = BigDecimal.ZERO;
+		
 	}
 
 }

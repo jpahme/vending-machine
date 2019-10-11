@@ -1,8 +1,9 @@
+package com.techelevator;
 import java.math.BigDecimal;
 
 public class ChangeCalculator {
 
-	public void calculateChange(BigDecimal cashTendered) {
+	public static void calculateChange(BigDecimal cashTendered) {
 		
 		int numberOfQuarters = 0;
 		int numberOfDimes = 0;
@@ -37,7 +38,7 @@ public class ChangeCalculator {
 		 
 	}
 	
-	public boolean greaterThanOrEqualToZero(BigDecimal coinValue, BigDecimal cashTendered) {
+	public static boolean greaterThanOrEqualToZero(BigDecimal coinValue, BigDecimal cashTendered) {
 		
 		if (cashTendered.subtract(coinValue).compareTo(BigDecimal.ZERO) == 1 || cashTendered.subtract(coinValue).compareTo(BigDecimal.ZERO) == 0 ){
 			return true;
