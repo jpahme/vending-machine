@@ -199,6 +199,62 @@ ChangeCalculator Class
 			-add one to count of pennies			
 
 		-print out "Total change is: number of quarters, number of dimes, number of nickels, and number of pennies
+
+
+Log Class
+
+    Method that opens a file called Log.txt and sets it up so that it can be appended
+    	-Create File object from Log.txt filename
+    	-If Log.txt does not exist
+    	
+    	
+    		-Create a new file called Log.txt
+		File newFile = new File(“myDataFile.txt”);
+		String message = “Appreciate\nElevate\nParticipate”;
+		
+		PrintWriter writer = null;
+		
+		// Instantiate the writer object with append functionality
+		If (newFile.exists()) {
+		    writer = new PrintWriter(new FileOutPutStream(newFile.getAbsoluteFile())), true));
+		}
+		
+		// Instantiate the writer object without append functionality
+		Else {
+			Writer = new PrintWriter(newFile.getAbsoluteFile());
+		}
+        	
+    	-Create a PrintWriter
+    	-Set the file up so it can be appended
     
+    
+    
+    
+    Method that logs when user Feeds Money
+    -create a DateTime variable with the current time in the right format
+    -assign a variable with the value of amount the user bucks fed
+    -assign a variable that is the value of current money
+    -create a string in the given format that uses all of the information
+    -append that String to the log
+    
+    Method that logs when user makes a purchase(after dispense)
+    -create a DateTime variable with the current time in the right format
+    -assign a variable to the value of the product name
+    -assign a variable that is the value of current money
+    -assign a variable to money after purchase
+    -create a string in the given format that uses all of the information
+    -append that String to the log
+     
+    Method tha tlogs when user finishes transaction
+    -create a DateTime variable with the current time in the right format
+    -assign a variable to the value of the product name
+    -assign a variable that is the value of current money
+    -assign a variable to current money after it has been reset to zero
+    -create a string in the given format that uses all of the information
+    -append that String to the log
+    
+ 
+    	
+        
 
 

@@ -26,21 +26,25 @@ public class Purchase {
 	public void feedMoney(Menu menu) {
 		String[] feedMoneyMenu = FeedMoneyMenu.getFeedMoneyMenuOptions();
 		String choice = (String) menu.getChoiceFromOptions(feedMoneyMenu);
+		BigDecimal amountToFeed = new BigDecimal(0);
 		if (choice.equals("$1")) {
-			Purchase.addToCurrentMoney(BigDecimal.valueOf(1));
+			amountToFeed = BigDecimal.valueOf(1).setScale(2, BigDecimal.ROUND_UP);
 		}
 		else if(choice.equals("$2")) {
-			Purchase.addToCurrentMoney(BigDecimal.valueOf(2));
+			amountToFeed = BigDecimal.valueOf(2).setScale(2, BigDecimal.ROUND_UP);
 		}
 		else if(choice.equals("$5")) {
-			Purchase.addToCurrentMoney(BigDecimal.valueOf(5));
+			amountToFeed = BigDecimal.valueOf(5).setScale(2, BigDecimal.ROUND_UP);
 		}
 		else if(choice.equals("$10")) {
-			Purchase.addToCurrentMoney(BigDecimal.valueOf(10));
+			amountToFeed = BigDecimal.valueOf(10).setScale(2, BigDecimal.ROUND_UP);
 		}
 		else {
 			System.out.println("Invalid choice");
+			return;
 		}
+		Purchase.addToCurrentMoney(amountToFeed);
+		Log.logFeedMoney(amountToFeed);
 
 	}
 

@@ -1,5 +1,7 @@
 package com.techelevator;
 
+import java.io.IOException;
+
 import com.techelevator.view.FeedMoneyMenu;
 import com.techelevator.view.Menu;
 import com.techelevator.view.PurchaseMenu;
@@ -39,7 +41,12 @@ public class VendingMachineCLI {
 		VendingMachineInventory vendingMachineInventory = new VendingMachineInventory();
 		vendingMachineInventory.createInventory();
 		Purchase purchase = new Purchase();
-		cli.run(vendingMachineInventory, purchase);
+		try {
+			Log.openLog();
+			cli.run(vendingMachineInventory, purchase);
+		} catch (IOException e) {
+			System.out.println("Log Not Found");
+		}
 	}
 	
 	public void goToPurchaseMenu(String choice, Purchase purchase, VendingMachineInventory inventory) {
