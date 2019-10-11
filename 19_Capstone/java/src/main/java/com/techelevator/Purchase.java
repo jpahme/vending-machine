@@ -72,6 +72,7 @@ public class Purchase {
 		String productName = selection.getName();
 		BigDecimal productCost = selection.getPrice();
 		Purchase.subtractFromCurrentMoney(productCost);
+		Log.logPurchase(selection);
 		BigDecimal remainingMoney = Purchase.getCurrentMoney();
 		subtractOneFromStock(selection);
 		System.out.println("Dispensing: " + productName + " $" + productCost + " $" + remainingMoney);
@@ -86,10 +87,10 @@ public class Purchase {
 	
 	public void finishTransaction() {
 		ChangeCalculator.calculateChange(getCurrentMoney());
-		resetCurrentMoney();
+		Log.logEndOfTransaction();
 	}
 	
-	public void resetCurrentMoney() {
+	public static void resetCurrentMoney() {
 		currentMoney = BigDecimal.ZERO;
 		
 	}

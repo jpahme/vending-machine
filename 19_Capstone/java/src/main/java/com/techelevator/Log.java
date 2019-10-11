@@ -11,20 +11,6 @@ import java.util.Date;
 
 public class Log {
 
-//	Live Demo
-//	import java.util.*;
-//	import java.text.*;
-//
-//	public class DateDemo {
-//
-//	   public static void main(String args[]) {
-//	      Date dNow = new Date( );
-//	      SimpleDateFormat ft = 
-//	      new SimpleDateFormat ("E yyyy.MM.dd 'at' hh:mm:ss a zzz");
-//
-//	      System.out.println("Current Date: " + ft.format(dNow));
-//	   }
-//	}
 	private static File outputFile = new File("Log.txt");
 	private static PrintWriter writer = null;
 	private static Date currentDateAndTime = new Date();
@@ -34,19 +20,44 @@ public class Log {
 
 		if (!outputFile.exists()) {
 			outputFile.createNewFile();
-			
+
 		}
 		writer = new PrintWriter(new FileOutputStream(outputFile.getAbsoluteFile()), true);
 	}
-	
+
 	public static void logFeedMoney(BigDecimal amountFed) {
-		
-		String logMessage = " FEED MONEY: "; 
-		String logFedAmount = amountFed.toString();		
+
+		String logMessage = " FEED MONEY: ";
+		String logFedAmount = amountFed.toString();
 		String logCurrentMoney = Purchase.getCurrentMoney().toString();
-		String feedMoneyLog = dateFormat.format(currentDateAndTime) + logMessage + "$" + logFedAmount + " $" + logCurrentMoney;
+		String feedMoneyLog = dateFormat.format(currentDateAndTime) + logMessage + "$" + logFedAmount + " $"
+				+ logCurrentMoney + "\n";
 		writer.print(feedMoneyLog);
 		writer.flush();
 	}
-	
+
+	public static void logPurchase(VendingMachineItem purchasedItem) {
+		String purchasedItemName = purchasedItem.getName();
+		String logCurrentMoney = Purchase.getCurrentMoney().toString();
+		String slotIdentifier = purchasedItem.getSlotIdentifier();
+		String logCurrentMoneyAfterPurchase = Purchase.getCurrentMoney().subtract(purchasedItem.getPrice()).toString();
+		String purchaseLog = dateFormat.format(currentDateAndTime) + " " + purchasedItemName + " " + slotIdentifier
+				+ " $" + logCurrentMoney + " $" + logCurrentMoneyAfterPurchase + "\n";
+		writer.print(purchaseLog);
+		writer.flush();
+	}
+
+	public static void logEndOfTransaction() {
+
+		String logMessage = " GIVE CHANGE: ";
+		String logCurrentMoney = Purchase.getCurrentMoney().toString();
+		Purchase.resetCurrentMoney();
+		String logCurrentMoneyAfterChange = Purchase.getCurrentMoney().toString();
+		String endOfTransactionLog = dateFormat.format(currentDateAndTime) + logMessage + "$" + logCurrentMoney + " $"
+				+ logCurrentMoneyAfterChange + "\n";
+		writer.print(endOfTransactionLog);
+		writer.flush();
+		writer.close();
+	}
+
 }
