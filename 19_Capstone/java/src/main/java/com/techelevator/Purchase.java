@@ -49,19 +49,34 @@ public class Purchase {
 		String userInput = input.nextLine();
 		for(VendingMachineItem item : inventory.getVendingMachineInventory()) {
 			if(userInput.equals(item.getSlotIdentifier())) {
-				// the code that dispenses the item
-				// 
+				if (item.getStock() == 0) {
+					System.out.println("SOLD OUT");
+				}
+				else {
+					dispense(item);
+				}
+				return;
 			}
 		}
-		if() {
-			
-		}
+		System.out.println("Invalid Selection");
 		
 
 	}
 
-	public void dispense() {
-
+	public void dispense(VendingMachineItem selection) {
+		String productName = selection.getName();
+		BigDecimal productCost = selection.getPrice();
+		Purchase.subtractFromCurrentMoney(productCost);
+		BigDecimal remainingMoney = Purchase.getCurrentMoney();
+		subtractOneFromStock(selection);
+		System.out.println("Dispensing: " + productName + " $" + productCost + " $" + remainingMoney);
+		System.out.println(selection.getPurchaseMessage());
+	}
+	
+	public void subtractOneFromStock(VendingMachineItem item) {
+		Integer currentStock = item.getStock();
+		Integer purchasedItem = 1;
+		item.setStock(currentStock - purchasedItem);
 	}
 
 }

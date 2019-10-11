@@ -9,11 +9,11 @@ public class Candy extends VendingMachineItem {
 	public Candy(String name, BigDecimal price, String slotIdentifier) {
 		super(name, price, slotIdentifier);
 	}
-	public static String getType() {
+	public String getType() {
 		return type;
 	}
 
-	public static String getPurchasemessage() {
+	public String getPurchaseMessage() {
 		return purchaseMessage;
 	}
 

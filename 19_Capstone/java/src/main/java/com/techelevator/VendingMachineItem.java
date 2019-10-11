@@ -8,6 +8,7 @@ public abstract class VendingMachineItem {
 	private String slotIdentifier;
 	private Integer stock = 5;
 	private String type;
+	private String purchaseMessage;
 	
 	public VendingMachineItem(String name, BigDecimal price, String slotIdentifier) {
 		this.name = name;
@@ -36,4 +37,6 @@ public abstract class VendingMachineItem {
 	public void setStock(int stock) {
 		this.stock = stock;
 	}
+	
+	public abstract String getPurchaseMessage();
 }
