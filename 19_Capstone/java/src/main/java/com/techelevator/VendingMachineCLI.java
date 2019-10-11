@@ -19,7 +19,7 @@ public class VendingMachineCLI {
 		this.menu = menu;
 	}
 
-	public void run(VendingMachineInventory inventory, Purchase purchase) {
+	public void run(VendingMachineInventory inventory, Purchase purchase) throws IOException {
 		while (true) {
 			String choice = (String) menu.getChoiceFromOptions(MAIN_MENU_OPTIONS);
 
@@ -30,6 +30,7 @@ public class VendingMachineCLI {
 				}
 			else if(choice.equals(MAIN_MENU_OPTION_EXIT)) {
 				System.out.println("Thank you for your purchase!");
+				Log.closeWriter();
 				System.exit(0);
 			}
 		}
@@ -49,7 +50,7 @@ public class VendingMachineCLI {
 		}
 	}
 	
-	public void goToPurchaseMenu(String choice, Purchase purchase, VendingMachineInventory inventory) {
+	public void goToPurchaseMenu(String choice, Purchase purchase, VendingMachineInventory inventory) throws IOException {
 		boolean purchasing = true;
 		while(purchasing) {
 			String[] purchaseMenuOptions = PurchaseMenu.getPurchaseMenuOptions();

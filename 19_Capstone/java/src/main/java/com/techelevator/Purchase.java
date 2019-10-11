@@ -1,5 +1,6 @@
 package com.techelevator;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.Scanner;
 
@@ -23,7 +24,7 @@ public class Purchase {
 		currentMoney = currentMoney.subtract(amountToSubtract).setScale(2, BigDecimal.ROUND_UP);
 	}
 
-	public void feedMoney(Menu menu) {
+	public void feedMoney(Menu menu) throws IOException {
 		String[] feedMoneyMenu = FeedMoneyMenu.getFeedMoneyMenuOptions();
 		String choice = (String) menu.getChoiceFromOptions(feedMoneyMenu);
 		BigDecimal amountToFeed = new BigDecimal(0);
@@ -48,7 +49,7 @@ public class Purchase {
 
 	}
 
-	public void selectProduct(VendingMachineInventory inventory) {
+	public void selectProduct(VendingMachineInventory inventory) throws IOException {
 		inventory.printInventory();
 		Scanner input = new Scanner(System.in);
 		String userInput = input.nextLine();
@@ -68,7 +69,7 @@ public class Purchase {
 
 	}
 
-	public void dispense(VendingMachineItem selection) {
+	public void dispense(VendingMachineItem selection) throws IOException {
 		String productName = selection.getName();
 		BigDecimal productCost = selection.getPrice();
 		Purchase.subtractFromCurrentMoney(productCost);
@@ -85,7 +86,7 @@ public class Purchase {
 		item.setStock(currentStock - purchasedItem);
 	}
 	
-	public void finishTransaction() {
+	public void finishTransaction() throws IOException {
 		ChangeCalculator.calculateChange(getCurrentMoney());
 		Log.logEndOfTransaction();
 	}

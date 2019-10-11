@@ -34,7 +34,7 @@ public class ChangeCalculator {
 			numberOfPennies++;
 		}
 		
-		System.out.println("Total Change: " + numberOfQuarters + "quarters, " + numberOfDimes + " dimes, " + numberOfNickels + "nickels, and " + numberOfPennies + " pennies");
+		System.out.println("Total Change: " + numberOfQuarters + "quarters, " + numberOfDimes + " dimes, " + numberOfNickels + " nickels, and " + numberOfPennies + " pennies");
 		 
 	}
 	
