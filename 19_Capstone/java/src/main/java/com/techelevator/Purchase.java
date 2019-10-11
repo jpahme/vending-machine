@@ -1,6 +1,7 @@
 package com.techelevator;
 
 import java.math.BigDecimal;
+import java.util.Scanner;
 
 import com.techelevator.view.FeedMoneyMenu;
 import com.techelevator.view.Menu;
@@ -42,7 +43,20 @@ public class Purchase {
 
 	}
 
-	public void selectProduct() {
+	public void selectProduct(VendingMachineInventory inventory) {
+		inventory.printInventory();
+		Scanner input = new Scanner(System.in);
+		String userInput = input.nextLine();
+		for(VendingMachineItem item : inventory.getVendingMachineInventory()) {
+			if(userInput.equals(item.getSlotIdentifier())) {
+				// the code that dispenses the item
+				// 
+			}
+		}
+		if() {
+			
+		}
+		
 
 	}
 

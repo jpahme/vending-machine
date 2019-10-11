@@ -29,7 +29,12 @@ public class VendingMachineCLI {
 				if(choice.equals("Feed Money")) {
 					purchase.feedMoney(menu);
 				}
-			}
+				else if(choice.equals("Select Product")) {
+					purchase.selectProduct(inventory);
+				}
+				else if(choice.equals("Finish Transaction")) {
+					}
+				}
 			else if(choice.equals(MAIN_MENU_OPTION_EXIT)) {
 				// do exit
 			}
