@@ -13,10 +13,6 @@ public class VendingMachineInventory {
 	public List <VendingMachineItem> getVendingMachineInventory() {
 		return vendingMachineInventory;
 	}
-
-	public void setVendingMachineInventory(List <VendingMachineItem> vendingMachineInventory) {
-		this.vendingMachineInventory = vendingMachineInventory;
-	}
 	
 	public void createInventory() {
 		File inputFile = new File("vendingmachine.csv");
@@ -71,4 +67,3 @@ public class VendingMachineInventory {
 }
 
 
-// A1|Potato Crisps|3.05|Chip
