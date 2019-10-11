@@ -35,7 +35,11 @@ public abstract class VendingMachineItem {
 	}
 
 	public void setStock(int stock) {
-		this.stock = stock;
+		if(stock>5 || stock<0) {
+			System.out.println("Invalid Stock Amount");
+		} else {
+			this.stock = stock;			
+		}
 	}
 	
 	public abstract String getPurchaseMessage();
