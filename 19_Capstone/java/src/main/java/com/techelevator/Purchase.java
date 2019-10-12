@@ -14,12 +14,11 @@ public class Purchase {
 	public static BigDecimal getCurrentMoney() {
 		return currentMoney.setScale(2, BigDecimal.ROUND_UP);
 	}
-	
 
 	public static void addToCurrentMoney(BigDecimal amountToAdd) {
 		currentMoney = currentMoney.add(amountToAdd).setScale(2, BigDecimal.ROUND_UP);
 	}
-	
+
 	public static void subtractFromCurrentMoney(BigDecimal amountToSubtract) {
 		currentMoney = currentMoney.subtract(amountToSubtract).setScale(2, BigDecimal.ROUND_UP);
 	}
@@ -30,17 +29,13 @@ public class Purchase {
 		BigDecimal amountToFeed = new BigDecimal(0);
 		if (choice.equals("$1")) {
 			amountToFeed = BigDecimal.valueOf(1).setScale(2, BigDecimal.ROUND_UP);
-		}
-		else if(choice.equals("$2")) {
+		} else if (choice.equals("$2")) {
 			amountToFeed = BigDecimal.valueOf(2).setScale(2, BigDecimal.ROUND_UP);
-		}
-		else if(choice.equals("$5")) {
+		} else if (choice.equals("$5")) {
 			amountToFeed = BigDecimal.valueOf(5).setScale(2, BigDecimal.ROUND_UP);
-		}
-		else if(choice.equals("$10")) {
+		} else if (choice.equals("$10")) {
 			amountToFeed = BigDecimal.valueOf(10).setScale(2, BigDecimal.ROUND_UP);
-		}
-		else {
+		} else {
 			System.out.println("Invalid choice");
 			return;
 		}
@@ -49,51 +44,61 @@ public class Purchase {
 
 	}
 
-	public void selectProduct(VendingMachineInventory inventory) throws IOException {
+	public boolean selectProduct(VendingMachineInventory inventory) throws IOException {
 		inventory.printInventory();
 		Scanner input = new Scanner(System.in);
 		String userInput = input.nextLine();
-		for(VendingMachineItem item : inventory.getVendingMachineInventory()) {
-			if(userInput.equals(item.getSlotIdentifier())) {
+		for (VendingMachineItem item : inventory.getVendingMachineInventory()) {
+			if (userInput.equals(item.getSlotIdentifier())) {
 				if (item.getStock() == 0) {
 					System.out.println("SOLD OUT");
-				}
-				else {
-					dispense(item);
-				}
-				return;
-			}
-		}
-		System.out.println("Invalid Selection");
-		
+					return false;
+				} else {
+					if (item.getPrice().compareTo(currentMoney) == 1) {
+						System.out.println("Insufficient funds");
+						return false;
+					} 
+					else {
+						dispense(item);
+						return true;
+					}
 
+				}
+			}
+			System.out.println("Invalid Selection");
+			return false;
+
+		}
+		return false;
 	}
 
-	public void dispense(VendingMachineItem selection) throws IOException {
+	public String dispense(VendingMachineItem selection) throws IOException {
 		String productName = selection.getName();
 		BigDecimal productCost = selection.getPrice();
 		Purchase.subtractFromCurrentMoney(productCost);
 		Log.logPurchase(selection);
 		BigDecimal remainingMoney = Purchase.getCurrentMoney();
 		subtractOneFromStock(selection);
-		System.out.println("Dispensing: " + productName + " $" + productCost + " $" + remainingMoney);
+		String dispenseMessage = "Dispensing: " + productName + " $" + productCost + " $" + remainingMoney;
+		System.out.println(dispenseMessage);
 		System.out.println(selection.getPurchaseMessage());
+		return dispenseMessage;
 	}
-	
+
 	public void subtractOneFromStock(VendingMachineItem item) {
 		Integer currentStock = item.getStock();
 		Integer purchasedItem = 1;
 		item.setStock(currentStock - purchasedItem);
 	}
-	
+
 	public void finishTransaction() throws IOException {
 		ChangeCalculator.calculateChange(getCurrentMoney());
 		Log.logEndOfTransaction();
 	}
-	
+
 	public static void resetCurrentMoney() {
 		currentMoney = BigDecimal.ZERO;
-		
+
 	}
 
 }

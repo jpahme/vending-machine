@@ -28,7 +28,7 @@ public class Log {
 		writer = new PrintWriter(new FileOutputStream(outputFile, true));
 	}
 
-	public static void logFeedMoney(BigDecimal amountFed) throws IOException {
+	public static String logFeedMoney(BigDecimal amountFed) throws IOException {
 		openLog();
 		System.out.println(writer.toString());
 		currentDateAndTime = new Date();
@@ -40,6 +40,7 @@ public class Log {
 		writer.append(feedMoneyLog);
 		writer.flush();
 		writer.close();
+		return feedMoneyLog;
 		
 	}
 
