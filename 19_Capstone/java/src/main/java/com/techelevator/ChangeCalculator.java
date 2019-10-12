@@ -43,6 +43,7 @@ public class ChangeCalculator {
 		 
 	}
 	
+	
 	public static boolean greaterThanOrEqualToZero(BigDecimal coinValue, BigDecimal cashTendered) {
 		
 		if (cashTendered.subtract(coinValue).compareTo(BigDecimal.ZERO) == 1 || cashTendered.subtract(coinValue).compareTo(BigDecimal.ZERO) == 0 ){

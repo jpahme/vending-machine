@@ -47,7 +47,7 @@ public class VendingMachineInventory {
 	}
 	
 	public void printInventory() {
-		
+		System.out.println("");
 		for (VendingMachineItem item : vendingMachineInventory) {
 			String slotIdentifier = item.getSlotIdentifier();
 			String itemName = item.getName();
