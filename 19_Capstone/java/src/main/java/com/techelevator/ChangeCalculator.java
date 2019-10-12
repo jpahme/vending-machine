@@ -3,7 +3,7 @@ import java.math.BigDecimal;
 
 public class ChangeCalculator {
 
-	public static void calculateChange(BigDecimal cashTendered) {
+	public static String calculateChange(BigDecimal cashTendered) {
 		
 		int numberOfQuarters = 0;
 		int numberOfDimes = 0;
@@ -14,6 +14,9 @@ public class ChangeCalculator {
 		BigDecimal nickelValue = new BigDecimal(0.05);
 		BigDecimal pennyValue = new BigDecimal(0.01);
 		
+		if (cashTendered.compareTo(BigDecimal.ZERO) == -1) {
+			return "Invalid";
+		}
 		while (greaterThanOrEqualToZero(quarterValue, cashTendered)) {
 			cashTendered = cashTendered.subtract(quarterValue);
 			numberOfQuarters++;
@@ -29,12 +32,14 @@ public class ChangeCalculator {
 			numberOfNickels++;
 		}
 		
-		while (greaterThanOrEqualToZero(pennyValue, cashTendered)) {
+		while (cashTendered.doubleValue() > 0) {
 			cashTendered = cashTendered.subtract(pennyValue);
 			numberOfPennies++;
 		}
 		
-		System.out.println("Total Change: " + numberOfQuarters + "quarters, " + numberOfDimes + " dimes, " + numberOfNickels + " nickels, and " + numberOfPennies + " pennies");
+		String totalChange = "Total Change: " + numberOfQuarters + " quarters, " + numberOfDimes + " dimes, " + numberOfNickels + " nickels, and " + numberOfPennies + " pennies";
+		System.out.println(totalChange);
+		return totalChange;
 		 
 	}
 	

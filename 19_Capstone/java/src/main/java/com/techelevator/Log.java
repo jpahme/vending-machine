@@ -41,33 +41,37 @@ public class Log {
 
 	}
 
-	public static void logPurchase(VendingMachineItem purchasedItem) throws IOException {
+	public static String logPurchase(VendingMachineItem purchasedItem) throws IOException {
 		openLog();
 		currentDateAndTime = new Date();
 		String purchasedItemName = purchasedItem.getName();
 		String logCurrentMoney = Purchase.getCurrentMoney().toString();
 		String slotIdentifier = purchasedItem.getSlotIdentifier();
 		String logCurrentMoneyAfterPurchase = Purchase.getCurrentMoney().subtract(purchasedItem.getPrice()).toString();
-		String purchaseLog = dateFormat.format(currentDateAndTime) + " " + purchasedItemName + " " + slotIdentifier
+		String purchaseLog = " " + purchasedItemName + " " + slotIdentifier
 				+ " $" + logCurrentMoney + " $" + logCurrentMoneyAfterPurchase + "\n";
-		writer.append(purchaseLog);
+		String purchaseLogWithDate = dateFormat.format(currentDateAndTime) + purchaseLog; 
+		writer.append(purchaseLogWithDate);
 		writer.flush();
 		writer.close();
+		return purchaseLog;
 
 	}
 
-	public static void logEndOfTransaction() throws IOException {
+	public static String logEndOfTransaction() throws IOException {
 		openLog();
 		currentDateAndTime = new Date();
 		String logMessage = " GIVE CHANGE: ";
 		String logCurrentMoney = Purchase.getCurrentMoney().toString();
 		Purchase.resetCurrentMoney();
 		String logCurrentMoneyAfterChange = Purchase.getCurrentMoney().toString();
-		String endOfTransactionLog = dateFormat.format(currentDateAndTime) + logMessage + "$" + logCurrentMoney + " $"
+		String endOfTransactionLog = logMessage + "$" + logCurrentMoney + " $"
 				+ logCurrentMoneyAfterChange + "\n";
-		writer.append(endOfTransactionLog);
+		String endOfTransactionLogWithDate = dateFormat.format(currentDateAndTime) + endOfTransactionLog;
+		writer.append(endOfTransactionLogWithDate);
 		writer.flush();
 		writer.close();
+		return endOfTransactionLog;
 
 	}
 
