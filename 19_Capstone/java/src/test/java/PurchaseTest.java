@@ -102,24 +102,5 @@ public class PurchaseTest {
 		assertEquals(expectedResult, actualResult);
 	}
 
-//	@Test
-//	public void selectingProductWithNoStockReturnsFalse() {
-//		inventory.createInventory();
-//		inventory.getVendingMachineInventory().get(0).setStock(0);
-//		boolean expectedResult = false;
-//		boolean actualResult = purchase.selectProduct(inventory.getVendingMachineInventory().get(0));
-//		
-//	}
-//	
-
-//	@Test
-//	public void testFeedingOneDollar() throws IOException {
-//		BigDecimal expectedResult = BigDecimal.valueOf(3.0).setScale(2);
-//		purchase.feedMoney(menu);
-//		BigDecimal actualResult = Purchase.getCurrentMoney();
-//		assertEquals(expectedResult, actualResult);
-//		
-//	}
-//	A1|Potato Crisps|3.05|Chip
 
 }
