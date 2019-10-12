@@ -18,30 +18,27 @@ public class Log {
 
 	public static void openLog() throws IOException {
 
-		if (outputFile.exists())
-			System.out.println("File exists");
-		if (!outputFile.exists()) { 
+		if (!outputFile.exists()) {
 			System.out.println("Creating new file");
 			outputFile.createNewFile();
 
-		}	
+		}
 		writer = new PrintWriter(new FileOutputStream(outputFile, true));
 	}
 
 	public static String logFeedMoney(BigDecimal amountFed) throws IOException {
 		openLog();
-		System.out.println(writer.toString());
 		currentDateAndTime = new Date();
 		String logMessage = " FEED MONEY: ";
 		String logFedAmount = amountFed.toString();
 		String logCurrentMoney = Purchase.getCurrentMoney().toString();
-		String feedMoneyLog = dateFormat.format(currentDateAndTime) + logMessage + "$" + logFedAmount + " $"
-				+ logCurrentMoney + "\n";
-		writer.append(feedMoneyLog);
+		String feedMoneyLog = logMessage + "$" + logFedAmount + " $" + logCurrentMoney + "\n";
+		String feedMoneyLogWithDate = dateFormat.format(currentDateAndTime) + feedMoneyLog;
+		writer.append(feedMoneyLogWithDate);
 		writer.flush();
 		writer.close();
 		return feedMoneyLog;
-		
+
 	}
 
 	public static void logPurchase(VendingMachineItem purchasedItem) throws IOException {
@@ -56,7 +53,7 @@ public class Log {
 		writer.append(purchaseLog);
 		writer.flush();
 		writer.close();
-		
+
 	}
 
 	public static void logEndOfTransaction() throws IOException {
@@ -71,12 +68,9 @@ public class Log {
 		writer.append(endOfTransactionLog);
 		writer.flush();
 		writer.close();
-		
-		
+
 	}
-	
-	
-	
+
 	public static void closeWriter() {
 		writer.flush();
 		writer.close();
