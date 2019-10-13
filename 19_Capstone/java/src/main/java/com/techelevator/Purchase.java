@@ -57,26 +57,24 @@ public class Purchase {
 					if (item.getPrice().compareTo(currentMoney) == 1) {
 						System.out.println("Insufficient funds");
 						return false;
-					} 
-					else {
+					} else {
 						dispense(item);
 						return true;
 					}
 
 				}
 			}
-			System.out.println("Invalid Selection");
-			return false;
 
 		}
+		System.out.println("Invalid Selection");
 		return false;
 	}
 
 	public String dispense(VendingMachineItem selection) throws IOException {
 		String productName = selection.getName();
 		BigDecimal productCost = selection.getPrice();
-		Purchase.subtractFromCurrentMoney(productCost);
 		Log.logPurchase(selection);
+		Purchase.subtractFromCurrentMoney(productCost);
 		BigDecimal remainingMoney = Purchase.getCurrentMoney();
 		subtractOneFromStock(selection);
 		String dispenseMessage = "Dispensing: " + productName + " $" + productCost + " $" + remainingMoney;
